@@ -70,7 +70,9 @@ This extension supports a number of commands for interacting with supported serv
    * `"args.vm.override.string"` - allow to override vm arguments. Once you edited this flag, *make sure "args.override.boolean" is set to true before launching your server. Otherwise the server will attempt to auto-generate the launch arguments as it normally does.*
    * `"args.program.override.string"` - allow to override program arguments. Once you edited this flag, *make sure "args.override.boolean" is set to true before launching your server. Otherwise the server will attempt to auto-generate the launch arguments as it normally does.*
    * `"mapProperty.launch.env"` - allow to override or add to the environment being passed to a server upon startup. This property's value should be an object with a set of key-value pairs, where the key is the environment variable name and the value is its value. For example, to set `LD_LIBRARY_PATH` for native libraries: `"mapProperty.launch.env": {"LD_LIBRARY_PATH": "/path/to/libs"}`. Note: environment variables set in your terminal are not inherited by servers launched from VSCode if VSCode was started from the desktop rather than that terminal.
-   
+
+   **Variable substitution in argument overrides:** Most RSP implementations resolve Eclipse-style `${env_var:NAME}` references in `"args.vm.override.string"` and `"args.program.override.string"` before launching. For example, `-Dapp.name=${env_var:MY_APP}` will substitute the value of the `MY_APP` environment variable from the RSP server's process environment. If the variable is not set, the reference is left as-is. Note that this behavior is provided by the RSP server, not the UI — a third-party RSP may not support it.
+
 ### Provisional Project Structure Details
    The following project structure options may not be supported by all server types and deployment types. These details are Provisional and may be changed before becoming official API. 
    
